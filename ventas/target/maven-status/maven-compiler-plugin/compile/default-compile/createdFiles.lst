@@ -1,0 +1,15 @@
+cl\ferreteria\ventas\dto\CrearVentaRequest.class
+cl\ferreteria\ventas\repository\VentaRepository.class
+cl\ferreteria\ventas\dto\CambioEstadoRequest.class
+cl\ferreteria\ventas\model\Venta.class
+cl\ferreteria\ventas\service\VentaService$1.class
+cl\ferreteria\ventas\service\VentaService.class
+cl\ferreteria\ventas\model\ItemVenta.class
+cl\ferreteria\ventas\controller\VentaController.class
+cl\ferreteria\ventas\model\EstadoVenta.class
+cl\ferreteria\ventas\config\SecurityConfig.class
+cl\ferreteria\ventas\dto\ItemRequest.class
+cl\ferreteria\ventas\VentasApplication.class
+cl\ferreteria\ventas\dto\MovimientoStockRequest.class
+cl\ferreteria\ventas\controller\EstadoController.class
+cl\ferreteria\ventas\dto\LineaStock.class
