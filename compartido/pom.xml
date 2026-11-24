@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>cl.ferreteria</groupId>
+    <artifactId>microservicios-ferreteria</artifactId>
+    <version>1.0.0</version>
+  </parent>
+  <artifactId>compartido</artifactId>
+  <description>Código común: seguridad JWT, CORS, Swagger, manejo de errores y cliente HTTP entre servicios</description>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-validation</artifactId>
+    </dependency>
+    <!-- Spring Security + validación/emisión de JWT (Nimbus) -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+    </dependency>
+    <!-- Swagger UI / OpenAPI 3 (línea 3.x = Spring Boot 4) -->
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+    </dependency>
+  </dependencies>
+</project>
