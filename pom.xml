@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>4.0.9</version>
+    <relativePath/>
+  </parent>
+  <groupId>cl.ferreteria</groupId>
+  <artifactId>microservicios-ferreteria</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+  <name>Microservicios Ferretería Los Maestros</name>
+
+  <properties>
+    <java.version>17</java.version>
+    <maven.compiler.release>17</maven.compiler.release>
+    <springdoc.version>3.0.2</springdoc.version>
+  </properties>
+
+  <modules>
+    <module>compartido</module>
+    <module>inventario</module>
+    <module>catalogo</module>
+    <module>ventas</module>
+    <module>pagos</module>
+    <module>usuarios</module>
+    <module>notificaciones</module>
+    <module>proveedores</module>
+  </modules>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>cl.ferreteria</groupId>
+        <artifactId>compartido</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springdoc</groupId>
+        <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+        <version>${springdoc.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+</project>

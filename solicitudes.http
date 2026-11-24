@@ -1,0 +1,88 @@
+### Ferretería Los Maestros — peticiones de prueba (REST Client / IntelliJ HTTP Client)
+
+### 1) Estado (público)
+GET http://localhost:3001/estado
+
+### 2) Catálogo público (sin token)
+GET http://localhost:3002/productos?texto=cemento
+
+### 3) Inventario SIN token → 401
+GET http://localhost:3001/productos
+
+### 4) Login ADMIN
+# @name loginAdmin
+POST http://localhost:3005/autenticacion/inicio-sesion
+Content-Type: application/json
+
+{ "correo": "admin@ferreteria.cl", "contrasena": "Admin123!" }
+
+### 5) Login CLIENTE
+# @name loginCliente
+POST http://localhost:3005/autenticacion/inicio-sesion
+Content-Type: application/json
+
+{ "correo": "cliente@ferreteria.cl", "contrasena": "Cliente123!" }
+
+### 6) Perfil (cualquier sesión)
+GET http://localhost:3005/autenticacion/perfil
+Authorization: Bearer {{loginCliente.response.body.token}}
+
+### 7) READ inventario (ADMIN)
+GET http://localhost:3001/productos?soloStockBajo=true
+Authorization: Bearer {{loginAdmin.response.body.token}}
+
+### 8) CREATE producto (ADMIN) → 201
+POST http://localhost:3001/productos
+Authorization: Bearer {{loginAdmin.response.body.token}}
+Content-Type: application/json
+
+{ "codigo": "ZZ100", "categoria": "Pinturas", "subcategoria": "Látex", "nombre": "Pintura de prueba",
+  "marca": "Sipa", "unidad": "Galón", "precioCompra": 1000, "precioVenta": 2000, "stock": 10, "stockMinimo": 2 }
+
+### 9) CREATE con CLIENTE → 403
+POST http://localhost:3001/productos
+Authorization: Bearer {{loginCliente.response.body.token}}
+Content-Type: application/json
+
+{ "codigo": "ZZ101" }
+
+### 10) UPDATE producto (ADMIN)
+PUT http://localhost:3001/productos/ZZ100
+Authorization: Bearer {{loginAdmin.response.body.token}}
+Content-Type: application/json
+
+{ "categoria": "Pinturas", "subcategoria": "Látex", "nombre": "Pintura de prueba v2",
+  "marca": "Sipa", "unidad": "Galón", "precioCompra": 1000, "precioVenta": 2500, "stock": 8, "stockMinimo": 2 }
+
+### 11) DELETE producto (ADMIN) → 204
+DELETE http://localhost:3001/productos/ZZ100
+Authorization: Bearer {{loginAdmin.response.body.token}}
+
+### 12) Venta (CLIENTE): inventario descuenta stock y entrega precios
+# @name venta
+POST http://localhost:3003/ventas
+Authorization: Bearer {{loginCliente.response.body.token}}
+Content-Type: application/json
+
+{ "items": [ { "codigo": "MC001", "cantidad": 2 }, { "codigo": "PT001", "cantidad": 1 } ] }
+
+### 13) Pagar la venta (CLIENTE) → la venta queda PAGADA
+POST http://localhost:3004/pagos
+Authorization: Bearer {{loginCliente.response.body.token}}
+Content-Type: application/json
+
+{ "idVenta": {{venta.response.body.id}}, "metodo": "TARJETA_DEBITO" }
+
+### 14) Mis ventas (CLIENTE ve solo las suyas)
+GET http://localhost:3003/ventas
+Authorization: Bearer {{loginCliente.response.body.token}}
+
+### 15) Contacto (público)
+POST http://localhost:3006/contacto
+Content-Type: application/json
+
+{ "nombre": "Juan Pérez", "correo": "juan@correo.cl", "mensaje": "Necesito cotizar cemento" }
+
+### 16) Consultas recibidas (ADMIN)
+GET http://localhost:3006/contacto
+Authorization: Bearer {{loginAdmin.response.body.token}}
